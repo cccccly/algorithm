@@ -4,12 +4,12 @@
 struct Node;
 typedef struct Node* PNode;
 typedef int DateType;
-struct Node{           /*µ¥Á´±í½Úµã½á¹¹*/
+struct Node{           /*å•é“¾è¡¨èŠ‚ç‚¹ç»“æ„*/
 	DateType info;
 	PNode link;
 };
 
-typedef struct Node* LinkList;    /* µ¥Á´±íÀàĞÍ */ 
+typedef struct Node* LinkList;    /* å•é“¾è¡¨ç±»å‹ */ 
 
 LinkList createNullList_link(){
 	LinkList llist = (LinkList)malloc(sizeof(struct Node));

@@ -12,7 +12,7 @@ struct SeqList{
 	DateType *element;
 }; 
 
-//´´½¨¿ÕĞòÁĞ±í 
+//åˆ›å»ºç©ºåºåˆ—è¡¨ 
 PSeqList createNullList_seq(int m){
 	PSeqList palist = (PSeqList)malloc(sizeof(struct SeqList));
 	if (palist != NULL){
@@ -24,19 +24,19 @@ PSeqList createNullList_seq(int m){
 		}
 		else free(palist);
 	}
-	printf("Out of space!\n"); /*·ÖÅäÄÚ´æÊ§°Ü*/
+	printf("Out of space!\n"); /*åˆ†é…å†…å­˜å¤±è´¥*/
 	return NULL; 
 }
 
-//ÔÚpalistËùÖ¸Ë³Ğò±íÖĞ£¬ÏÂ±êÎª p µÄÔªËØºó²åÈëÖµÎª x µÄÔªËØ 
+//åœ¨palistæ‰€æŒ‡é¡ºåºè¡¨ä¸­ï¼Œä¸‹æ ‡ä¸º p çš„å…ƒç´ åæ’å…¥å€¼ä¸º x çš„å…ƒç´  
 int insertPost_seq(PSeqList palist,int p,DateType x){
 	int i;
 	if(palist ->n >= palist ->MAXNUM){
-		printf("Overflow!\n");            /*Òç³ö*/
+		printf("Overflow!\n");            /*æº¢å‡º*/
 		return 0;
 	} 
 	if(p <0 || p > palist ->n){
-		printf("Not exist!\n");           /*²»´æÔÚÏÂ±êÎªpµÄÔªËØ*/
+		printf("Not exist!\n");           /*ä¸å­˜åœ¨ä¸‹æ ‡ä¸ºpçš„å…ƒç´ */
 		return 0; 
 	}
 	for(i =palist ->n;i >= p +1;i--){
@@ -58,7 +58,7 @@ PSeqList reverse_seq(PSeqList palist){
 	return palist;
 }
 
-//É¾³ıÔªËØx£¬ºóÃæµÄÍùÇ°Å² 
+//åˆ é™¤å…ƒç´ xï¼Œåé¢çš„å¾€å‰æŒª 
 void deleteX_seq(PSeqList palist,DateType x){
 	int cnt = 0;
 	for(int i = 0;i <= palist->n-1;i++){
@@ -66,7 +66,7 @@ void deleteX_seq(PSeqList palist,DateType x){
 			cnt++;
 		}
 		else{
-			palist->element[i-cnt] = palist->element[i];  //ÏòÇ°ÒÆ¶¯µÄ¸ñ×ÓÊıÎªÒÑÕÒµ½xµÄ¸öÊı 
+			palist->element[i-cnt] = palist->element[i];  //å‘å‰ç§»åŠ¨çš„æ ¼å­æ•°ä¸ºå·²æ‰¾åˆ°xçš„ä¸ªæ•° 
 		}
 	}
 	palist->n = palist->n-cnt;
@@ -75,7 +75,7 @@ void deleteX_seq(PSeqList palist,DateType x){
 int main()
 {
 	PSeqList palist;
-	palist = createNullList_seq(100);   //´´½¨¿ÕË³Ğò±íÊ±£¬Èç¹û²»ÉêÇë´óÒ»µãµÄÄÚ´æ¿ÉÄÜºóÃæ²åÈëµÄÊ±ºòÃ»µØ·½ÍùºóÅ²¡£ 
+	palist = createNullList_seq(100);   //åˆ›å»ºç©ºé¡ºåºè¡¨æ—¶ï¼Œå¦‚æœä¸ç”³è¯·å¤§ä¸€ç‚¹çš„å†…å­˜å¯èƒ½åé¢æ’å…¥çš„æ—¶å€™æ²¡åœ°æ–¹å¾€åæŒªã€‚ 
 	palist ->MAXNUM = 100;
 	srand((unsigned int)time(NULL));
 	for(int i = 0;i <= 50;i++){
