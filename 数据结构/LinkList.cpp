@@ -1,10 +1,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <iostream>
+#include <>
 struct Node;
 typedef struct Node* PNode;
 typedef int DateType;
-struct Node{           /*å•é“¾è¡¨èŠ‚ç‚¹ç»“æž„*/
+struct Node{           /* å•é“¾è¡¨èŠ‚ç‚¹ç»“æž„*/
 	DateType info;
 	PNode link;
 };
@@ -29,6 +30,39 @@ int insertPost_link(LinkList llist,PNode p,DateType x){
 	} 
 }
 
+int deleteP_link(LinkList llist, PNode p){
+	PNode q;
+	for(q = llist->link;q != NULL;q = q->link){
+		if(q->link == p)
+			break;
+	}
+	if(q){
+		q->link = p->link;
+		free(p);
+		return 1;
+	}
+	else return 0;
+}
+//µ¥Á´±íÈ¥³ýÖØ¸´ÔªËØ
+void we_are_diffrent(LinkList llist){
+	for(PNode q = llist;q != NULL;q = q->link){
+		
+	}
+} 
+
+//Ë«ÏòÁ´±í
+
+struct DoubleNode;
+typedef struct DoubleNode * PDoubleNode;
+struct DoubleNode{  //Ë«Á´±í½Úµã 
+	DateType info;
+	PDoubleNode llink,rlink; 
+}; 
+
+struct DoubleList{  //Ë«Á´±íÀàÐÍ 
+	PDoubleNode head; 
+	PDoubleNode rear;
+};
 
 int main()
 {
@@ -40,5 +74,8 @@ int main()
 	for(PNode p = llist1->link;p != NULL;p = p->link){
 		printf("%d ",p->info);
 	}
+	printf("\n");
+
+	
 	return 0;	
 } 
