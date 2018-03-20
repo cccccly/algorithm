@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <iostream>
-#include <>
+#include <cmath>
 struct Node;
 typedef struct Node* PNode;
 typedef int DateType;
@@ -64,6 +64,29 @@ struct DoubleList{  //Ë«Á´±íÀàÐÍ
 	PDoubleNode rear;
 };
 
+LinkList delete_same(LinkList llist){
+	PNode p,q,r;
+	if(llist == NULL){
+		printf("LinkList is empty!!!\n"); 
+		return NULL;
+	}
+	p = llist ;
+	while(p->link != NULL){
+		q = p->link;
+		while(q->link != NULL){
+			if(p->link->info == q->link->info){
+				r = q->link;
+				q->link = q->link->link;
+				free(r);
+			}
+			else 
+				q = q->link;
+		}
+		p = p->link;
+	}
+	return llist;
+} 
+
 int main()
 {
 	LinkList llist1 = createNullList_link();
@@ -75,7 +98,10 @@ int main()
 		printf("%d ",p->info);
 	}
 	printf("\n");
-
+	delete_same(llist1);
+	for(PNode p = llist1->link;p != NULL;p = p->link){
+		printf("%d ",p->info);
+	}
 	
 	return 0;	
 } 
