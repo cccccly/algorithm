@@ -16,8 +16,12 @@ public class Temperature {
 		// TODO Auto-generated method stub
 		System.out.println("Input a number:");
 		int n;
+		String s;
 		Scanner cin = new Scanner(System.in);
-		n = cin.nextInt();
-		System.out.println(Factorial(n));	
+		n = cin.nextInt();   
+		s = cin.next();
+		System.out.print(s);
+		System.out.println(Factorial(n));
+		cin.close();
 	}
 }

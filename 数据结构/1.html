@@ -1,0 +1,780 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+ <head>
+  <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+  <meta content="IE=edge" http-equiv="X-UA-Compatible"/>
+  <meta content="width=device-width, initial-scale=1" name="viewport"/>
+  <title>
+   语义分析系统
+  </title>
+  <link href="css/bootstrap.min.css" rel="stylesheet"/>
+  <link href="css/site.min.css?v=9e95f11fef" rel="stylesheet" type="text/css"/>
+  <link href="http://ictclas.nlpir.org:80/nlpir/css/index.css" rel="stylesheet" type="text/css"/>
+  <script src="http://api.map.baidu.com/api?v=2.0&amp;ak=w4uvd2bSkp8yGL9UteRCptcQ" type="text/javascript">
+  </script>
+  <script src="js/html5shiv.min.js">
+  </script>
+  <script src="http://ictclas.nlpir.org:80/nlpir/js/jquery-1.11.1.min.js">
+  </script>
+  <script src="js/respond.min.js">
+  </script>
+  <script src="http://libs.baidu.com/jquery/1.9.0/jquery.js">
+  </script>
+  <script src="http://cdn.bootcss.com/bootstrap/2.3.1/js/bootstrap-transition.js">
+  </script>
+  <script src="js/jquery.min.js">
+  </script>
+  <script src="js/bootstrap.min.js">
+  </script>
+  <style type="text/css">
+   .anchorBL{ 
+display:none; 
+}   
+    .ul2 li{
+      float:left;
+      margin-left:100px;
+      margin-top:25px;
+      list-style:none;
+    } 
+    .ul2 li a{
+      display:block;
+      width:90px;
+      height:90px;
+      border-radius:45px;
+    } 
+
+    
+    .ul2 li:nth-child(1) a{
+      background:#99ff99 url(../images/y_05.jpg) no-repeat center;
+      }   
+    .ul2 li:nth-child(2) a{
+      background:#3ec7fe url(../images/y_25.jpg) no-repeat center;
+    } 
+    .ul2 li:nth-child(3) a{
+      background:#90d4ff url(../images/y_27.jpg) no-repeat center;
+    } 
+    .ul2 li:nth-child(4) a{
+      background:#90a5ff url(../images/y_19.jpg) no-repeat center;
+    } 
+    .ul2 li:nth-child(5) a{
+      background:#a090ff url(../images/y_22.jpg) no-repeat center;
+    } 
+    .ul2 li:nth-child(6) a{
+      background:#c290ff url(../images/y_30.jpg) no-repeat center;
+    } 
+
+.radius{
+
+  width:140px;
+
+  height:140px;
+
+  background:#ff9090 url(../images/m_03.jpg) no-repeat center;
+
+  border-radius:70px;
+
+  position:absolute;
+
+  left:-14px;
+
+  top:-24px;
+
+}
+
+.radius-2{
+
+  width:140px;
+
+  height:140px;
+
+  background:#ffb790 url(../images/r_03.jpg) no-repeat center;
+
+  border-radius:70px;
+
+  position:absolute;
+
+  left:-14px;
+
+  top:-24px;
+
+}
+
+.radius-3{
+
+  width:140px;
+
+  height:140px;
+
+  background:#ffcf90 url(../images/c_03.jpg) no-repeat center;
+
+  border-radius:70px;
+
+  position:absolute;
+
+  left:-14px;
+
+  top:-24px;
+
+}
+
+.radius-g{
+
+  width:140px;
+
+  height:140px;
+
+  background:#99ff99 url(../images/g_03.jpg) no-repeat center;
+
+  border-radius:70px;
+
+  position:absolute;
+
+  left:-14px;
+
+  top:-24px;
+
+}
+
+.radius-4{
+
+  width:140px;
+
+  height:140px;
+
+  background:#ead700 url(../images/w_03.jpg) no-repeat center;
+
+  border-radius:70px;
+
+  position:absolute;
+
+  left:-14px;
+
+  top:-24px;
+
+}
+
+.radius-5{
+
+  width:140px;
+
+  height:140px;
+
+  background:#ff6642 url(../images/q_03.jpg) no-repeat center;
+
+  border-radius:70px;
+
+  position:absolute;
+
+  left:-14px;
+
+  top:-24px;
+
+}
+  </style>
+  <!--brat-->
+  <script src="http://ictclas.nlpir.org:80/nlpir/brat/client/lib/head.load.min.js" type="text/javascript">
+  </script>
+  <!--Echarts-->
+  <script src="http://ictclas.nlpir.org:80/nlpir/build/dist/echarts.js">
+  </script>
+  <script type="text/javascript">
+   $(document).ready(function(e) {
+			$(".ul4>a").click(function(){
+				$('.pag').hide();
+				$($(this).attr('href')).fadeIn(800);
+				return false;
+			});	
+		});
+  </script>
+ </head>
+ <body>
+  <!-- <div class="header" style="background-image: url(images/header.jpg);min-height: 189px;">
+   <div>
+    <a href="https://github.com/NLPIR-team" target="_black">
+     <img alt="Fork me on GitHub" src="images/github.png" style="position: absolute; top: 0; right: 0; border: 0;"/>
+    </a>
+   </div>
+  </div> -->
+  <div class="container-fluid">
+   <div class="row" style="position:relative;background:#dddee2;padding-bottom:6%;">
+    <div class="col-md-12 center-block">
+     <div class="col-md-12">
+      <ul class="nav nav-pills" style="margin-left:4%;font-size: 16px;color: #000;line-height: 34px;">
+       <li role="presentation">
+        <a href="html/jianjie-0.html" target="_black">
+         首页
+        </a>
+       </li>
+       <!-- <li role="presentation">
+        <a href="http://ictclas.nlpir.org/website/" target="_black">
+         智能教育平台
+        </a>
+       </li>
+       <li role="presentation">
+        <a href="http://202.38.128.93:96/JZSearch/" target="_black">
+         语义智能搜索
+        </a>
+       </li>
+       <li role="presentation">
+        <a href="http://202.122.38.122:96/security1" target="_black">
+         微博事件分析
+        </a>
+       </li>
+       <li role="presentation">
+        <a href="http://202.122.38.122:90/webprotege" target="_black">
+         本体工具
+        </a>
+       </li> -->
+      </ul>
+     </div>
+     <div class="col-md-12 center-block">
+      <div class="row">
+      <!--  <div class="pull-left" style="width:4%;">
+        <ul class="pull-right" style="margin-top: 10px;list-style:none;">
+         <li id="tradition">
+          <a href="javascript:void(0); ">
+           <img src="images/fan.png"/>
+          </a>
+         </li>
+         <li id="spell">
+          <a href="javascript:void(0); ">
+           <img src="images/pin.png"/>
+          </a>
+         </li>
+        </ul>
+       </div> -->
+       <div class="col-md-11 center-block" style="float:none;padding-left: 0px;padding-right: 0px;">
+        <textarea class="form-control" id="input1" rows="16"></textarea>
+        <div id="transform">
+        </div>
+       </div>
+      </div>
+     </div>
+     <div class="col-md-12 center-block">
+      <div style="width:8%;float:left;margin-left:46%;margin-top:25px">
+       <button class="btn btn-primary btn-lg" id="btn" type="button">
+        start
+       </button>
+      </div>
+      <div class="pull-right" style="margin-right:8%;margin-top:25px">
+       <form class="form-inline" role="form">
+        <select class="form-control">
+         <option value="url">
+          网页URL
+         </option>
+        </select>
+        <div class="form-group">
+         <label class="sr-only" for="exampleInputEmail2">
+          网页URL
+         </label>
+         <input class="form-control" id="rsslink" placeholder="请输入网页URL" type="email"/>
+        </div>
+        <input class="btn btn-default" id="smt" type="button" value="抓取"/>
+       </form>
+      </div>
+     </div>
+    </div>
+   </div>
+   <div class="row" style="position:relative;">
+    <div class="row" style="margin-top:-5.4%">
+     <div class="header-inner center-block">
+      <ul class="ul2 list-unstyled">
+       <li>
+        <ul class="ul4 list-unstyled">
+         <a href="#one" id="fenc">
+         </a>
+        </ul>
+       </li>
+       <li>
+        <ul class="ul4 list-unstyled">
+         <a href="#two" id="shiti">
+         </a>
+        </ul>
+       </li>
+       <li>
+        <ul class="ul4 list-unstyled">
+         <a href="#six" id="cipin">
+         </a>
+        </ul>
+       </li>
+       <li>
+        <ul class="ul4 list-unstyled">
+         <a href="#four" id="fenlei">
+         </a>
+        </ul>
+       </li>
+       <li>
+        <ul class="ul4 list-unstyled">
+         <a href="#eight" id="emotion">
+         </a>
+        </ul>
+       </li>
+       <li>
+        <ul class="ul4 list-unstyled">
+         <a href="#one" id="keywords">
+         </a>
+        </ul>
+       </li>
+      </ul>
+     </div>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-12" style="margin-top:100px">
+     <div class="row">
+      <div class="col-md-12 pag" id="one">
+       <div class="warp col-md-12 center-block " style="float:none">
+        <div class="radius">
+        </div>
+        <div class="col-md-2 tag" style="padding-left: 0px;padding-right: 0px;">
+         <div>
+          <h5 style="float:left;">
+           词性类别
+          </h5>
+          <!-- <a href="html/readme.htm">
+           <img class="qq" src="images/qq.png"/>
+          </a> -->
+         </div>
+         <div class="clearfix">
+         </div>
+         <ul>
+          <li>
+           <div class="n0">
+            <a class="on">
+             名词
+            </a>
+           </div>
+           <div class="n1">
+            <a class="on1">
+             动词
+            </a>
+           </div>
+           <div class="n15">
+            <a class="on2">
+             介词
+            </a>
+           </div>
+          </li>
+          <li>
+           <div class="n21">
+            <a class="on3">
+             后缀
+            </a>
+           </div>
+           <div class="n6">
+            <a class="on4">
+             代词
+            </a>
+           </div>
+           <div class="n5">
+            <a class="on5">
+             数词
+            </a>
+           </div>
+          </li>
+          <li>
+           <div class="n16">
+            <a class="on6">
+             连词
+            </a>
+           </div>
+           <div class="n17">
+            <a class="on7">
+             助词
+            </a>
+           </div>
+           <div class="n18">
+            <a class="on8">
+             叹词
+            </a>
+           </div>
+          </li>
+          <li>
+           <div class="n20">
+            <a class="on9">
+             前缀
+            </a>
+           </div>
+           <div class="n10">
+            <a class="on10">
+             量词
+            </a>
+           </div>
+           <div class="n11">
+            <a class="on11">
+             副词
+            </a>
+           </div>
+          </li>
+          <li class="ali">
+           <div class="n12">
+            <a class="on12">
+             语气词
+            </a>
+           </div>
+           <div class="n13">
+            <a class="on13">
+             拟声词
+            </a>
+           </div>
+          </li>
+          <li class="ali">
+           <div class="n14">
+            <a class="on14">
+             字符串
+            </a>
+           </div>
+           <div class="n2">
+            <a class="on15">
+             形容词
+            </a>
+           </div>
+          </li>
+          <li class="ali">
+           <div class="n3">
+            <a class="on16">
+             时间词
+            </a>
+           </div>
+           <div class="n7">
+            <a class="on17">
+             处所词
+            </a>
+           </div>
+          </li>
+          <li class="ali">
+           <div class="n8">
+            <a class="on18">
+             区别词
+            </a>
+           </div>
+           <div class="n4">
+            <a class="on19">
+             方位词
+            </a>
+           </div>
+          </li>
+          <li class="ali">
+           <div class="n9">
+            <a class="on20">
+             状态词
+            </a>
+           </div>
+           <div class="n19">
+            <a class="on21">
+             标点符号
+            </a>
+           </div>
+          </li>
+          <li class="ali">
+           <div class="n22">
+            <a class="on22">
+             自定义词
+            </a>
+           </div>
+          </li>
+         </ul>
+        </div>
+        <div class="col-md-8">
+         <div class="text" id="fenci1">
+         </div>
+        </div>
+        <div class="col-md-2">
+         <div style="width:100%">
+          <h2>
+           新词发现
+          </h2>
+          <div class="xin" id="newws">
+          </div>
+          <h3>
+           用户自定义词语
+          </h3>
+          <textarea class="t" id="yonghuci"></textarea>
+          <br/>
+          <input class="btn btn-primary" id="but" type="button" value="导入"/>
+         </div>
+        </div>
+       </div>
+      </div>
+      <div class="col-md-12 pag" id="two">
+       <div class="warp-2 col-md-11 center-block" style="float:none;padding-left: 0px;padding-right: 0px;">
+        <div class="radius-2">
+        </div>
+        <div class="col-md-2 box" style="padding-left: 0px;padding-right: 0px;">
+         <ul class="ul3">
+          <li id="tb2">
+           <a href="javascript:void(0); ">
+           </a>
+          </li>
+          <li id="wb2">
+           <a href="javascript:void(0); ">
+           </a>
+          </li>
+          <li>
+           <a href="html/chouqu-2.html" style="display:table;" target="_black">
+           </a>
+          </li>
+         </ul>
+        </div>
+        <div class="col-md-9">
+         <div class="tex" id="shitichouqu">
+          <div id="stcq1">
+           <div id="main2" style="height:400px; ">
+           </div>
+          </div>
+          <div class="shitifenlei" id="stcq2" style="display:table;">
+           <div class="s1">
+            <div class="t0">
+             <a class="t01">
+              人名：
+             </a>
+             <div class="tt" id="persons" style="overflow-y:auto; overflow-x:hidden;">
+             </div>
+            </div>
+            <div class="t3">
+             <a class="t01">
+              关键词：
+             </a>
+             <div class="tt" id="keyword" style="overflow-y:auto; overflow-x:hidden;">
+             </div>
+            </div>
+           </div>
+           <div class="s2">
+            <div class="t1">
+             <a class="t01">
+              地名：
+             </a>
+             <div class="tt" id="locations" onclick="window.location.href='#ditu'" style="overflow-y:auto; overflow-x:hidden;">
+             </div>
+            </div>
+            <div class="t6">
+             <a class="t01">
+              时间：
+             </a>
+             <div class="tt" id="time" style="overflow-y:auto; overflow-x:hidden;">
+             </div>
+            </div>
+           </div>
+           <div class="s3">
+            <div class="t2">
+             <a class="t01">
+              机构名：
+             </a>
+             <div class="tt" id="organizations" style="overflow-y:auto; overflow-x:hidden;">
+             </div>
+            </div>
+            <div class="t5">
+             <a class="t01">
+              媒体：
+             </a>
+             <div class="tt" id="medias" style="overflow-y:auto; overflow-x:hidden;">
+             </div>
+            </div>
+           </div>
+           <div class="s4">
+            <div class="t4">
+             <a class="t01">
+              作者：
+             </a>
+             <div class="tt" id="authors" style="overflow-y:auto; overflow-x:hidden;">
+             </div>
+            </div>
+           </div>
+          </div>
+         </div>
+        </div>
+       </div>
+      </div>
+      <div class="col-md-12 pag" id="three">
+       <div class="warp-2 col-md-11 center-block" style="float:none;padding-left: 0px;padding-right: 0px;">
+        <div class="radius-3">
+        </div>
+        <div class="col-md-2 box" style="padding-left: 0px;padding-right: 0px;">
+         <ul class="ul3">
+          <li id="tb3">
+           <a href="javascript:void(0);">
+           </a>
+          </li>
+          <li id="wb3">
+           <a href="javascript:void(0);">
+           </a>
+          </li>
+          <li>
+           <a href="html/cipin-3.html">
+           </a>
+          </li>
+         </ul>
+        </div>
+        <div class="col-md-10" style="margin:-10px;">
+         <div class="tex" id="wordfreq1">
+          <div id="main3a" style="height:320px; width:280px; float:left;margin-top:10px">
+          </div>
+          <div id="main3b" style="height:320px; width:280px; float:left;margin-top:10px">
+          </div>
+          <div id="main3c" style="height:320px; width:285px; float:left;margin-top:10px">
+          </div>
+         </div>
+         <div class="cipintongji" id="wordfreq2" style="overflow-y:auto; overflow-x:hidden;">
+         </div>
+        </div>
+       </div>
+      </div>
+      <div class="col-md-12 pag" id="four">
+       <div class="warp-3 col-md-11 center-block" style="float:none;padding-left: 0px;padding-right: 0px;">
+        <div class="radius-4">
+        </div>
+        <div class="col-md-2 box" style="padding-left: 0px;padding-right: 0px;">
+         <div class="rad" onclick="window.open('html/fenlei-4.html');">
+         </div>
+        </div>
+        <div class="col-md-9">
+         <div class="tex">
+          <div id="main4" style="height:340px; padding-left:20px;">
+          </div>
+         </div>
+        </div>
+       </div>
+      </div>
+      <div class="col-md-12 pag" id="five">
+       <div class="warp-5 col-md-11 center-block" style="float:none;padding-left: 0px;padding-right: 0px;">
+        <div class="radius-5">
+        </div>
+        <div class="col-md-2 box" style="padding-left: 0px;padding-right: 0px;">
+         <div class="rad-2" onclick="window.open('html/qinggan-5.html');">
+         </div>
+        </div>
+        <div class="col-md-9">
+         <div class="tex">
+          <div id="main5a" style="height:340px; width:385px; float:left;padding-left:30px; padding-top:10px;">
+          </div>
+          <div id="main5b" style="height:340px; width:355px;   float:right; padding-right:30px;padding-top:10px;">
+          </div>
+         </div>
+        </div>
+       </div>
+      </div>
+      <div class="col-md-12 pag" id="six">
+       <div class="warp-2 col-md-12 center-block " style="float:none;padding-left: 0px;">
+        <div class="radius-g">
+        </div>
+        <div class="col-md-2 box" style="padding-left: 0px;padding-right: 0px;">
+         <ul class="ul3">
+          <li id="tb6">
+           <a href="javascript:void(0);">
+           </a>
+          </li>
+          <li id="wb6">
+           <a href="javascript:void(0);">
+           </a>
+          </li>
+          <li>
+           <a onclick="window.open('html/qinggan-5.html');">
+           </a>
+          </li>
+         </ul>
+        </div>
+        <div class="col-md-9">
+         <div class="text">
+          <div id="keyws1" style="padding-left:20px; padding-top:50px;">
+           <div id="cloud">
+           </div>
+          </div>
+          <div id="keyws2" style="text-align:center; padding-top:50px;">
+          </div>
+         </div>
+        </div>
+       </div>
+      </div>
+      <div class="col-md-12 pag" id="seven">
+       <div class="warp-6 col-md-11 center-block" style="float:none;padding-left: 0px;padding-right: 0px;">
+        <div class="radius-6">
+        </div>
+        <div class="col-md-2 box" style="padding-left: 0px;padding-right: 0px;">
+         <div class="rad-2" onclick="window.open('html/word2vec-7.html');">
+         </div>
+        </div>
+        <div class="col-md-9">
+         <div class="tex">
+          <div id="main7" style="height:400px; ">
+          </div>
+         </div>
+        </div>
+       </div>
+      </div>
+      <div class="pag" id="eight">
+       <div class="warp-7 center-block">
+        <div class="radius-7">
+        </div>
+        <div class="box">
+         <div class="rad-2" onclick="window.open('html/yicunjufa-8.html');">
+         </div>
+         <div class="texta1" style="padding-left:10px; padding-top:15px; overflow-y:hidden; overflow-x:auto;">
+          <!--  <canvas id="myCanvas"  width="800px" height="332px"></canvas>-->
+          <div id="parse">
+           <div id="tDiv" style=" width:4800px;">
+           </div>
+          </div>
+         </div>
+        </div>
+       </div>
+      </div>
+      <div class="col-md-12 pag" id="nine">
+       <div class="warp-7 col-md-11 center-block" style="float:none;padding-left: 0px;padding-right: 0px;">
+        <div class="radius-8">
+        </div>
+        <div class="col-md-2 box" style="padding-left: 0px;padding-right: 0px;">
+         <div class="rad-2">
+         </div>
+        </div>
+        <div class="col-md-9">
+         <div class="tex">
+          <div id="allmap" style="height:415px; width:765px;float:left;">
+          </div>
+          <div id="allmap1" style="height:415px; width:765px;float:left;">
+          </div>
+         </div>
+        </div>
+       </div>
+      </div>
+      <div class="col-md-12 pag" id="ten">
+       <div class="warp-7 col-md-11 center-block" style="float:none;padding-left: 0px;padding-right: 0px;">
+        <div class="radius-9">
+        </div>
+        <div class="col-md-2 box" style="padding-left: 0px;padding-right: 0px;">
+         <div class="rad-2">
+         </div>
+        </div>
+        <div class="col-md-9">
+         <div class="tex">
+          <div id="main8" style="height:340px; width:760px;  ">
+          </div>
+         </div>
+        </div>
+       </div>
+      </div>
+      <div class="col-md-12 pag" id="eleven">
+       <div class="warp-7 col-md-11 center-block" style="float:none;padding-left: 0px;padding-right: 0px;">
+        <div class="radius-10">
+        </div>
+        <div class="col-md-2 box" style="padding-left: 0px;padding-right: 0px;">
+         <div class="rad-2" onclick="window.open('html/zhaiyao-11.html');">
+         </div>
+        </div>
+        <div class="col-md-9">
+         <div class="tex" id="summary">
+         </div>
+        </div>
+       </div>
+      </div>
+     </div>
+    </div>
+   </div>
+  </div>
+  <div style="float: left; height: 200px;">
+    
+  </div>
+    
+  </div>
+ 
+ </body>
+</html>
